@@ -55,6 +55,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'assign.urls'
 
+POSTGRESQL_ADDON_HOST=os.environ['POSTGRESQL_ADDON_HOST']
+POSTGRESQL_ADDON_DB=os.environ['POSTGRESQL_ADDON_DB']
+POSTGRESQL_ADDON_PASSWORD=os.environ['POSTGRESQL_ADDON_PASSWORD']
+POSTGRESQL_ADDON_USER=os.environ['POSTGRESQL_ADDON_USER']
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -81,16 +86,15 @@ DATABASES = {
     'default': {
 
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'gokul',
-       'USER': 'postgres',
-       'PASSWORD': 'pass',
-       'HOST': 'localhost',
+       'NAME': POSTGRESQL_ADDON_DB,
+       'USER': POSTGRESQL_ADDON_USER,
+       'PASSWORD': POSTGRESQL_ADDON_PASSWORD,
+       'HOST': POSTGRESQL_ADDON_HOST,
        'PORT': '5432',
    }
    
      
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
