@@ -2,4 +2,4 @@ django
 django-heroku
 psycopg2
 djangorestframework
-
+os
