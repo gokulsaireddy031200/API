@@ -1,1 +1,1 @@
-web: gunicorn assign:app
+web: gunicorn assign.wsgi
