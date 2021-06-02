@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import os
 # Create your views here.
 from django.http import HttpResponse
 import psycopg2 as py
