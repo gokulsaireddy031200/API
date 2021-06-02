@@ -7,13 +7,27 @@ import psycopg2 as py
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+'''
+	 conn = py.connect(host="localhost",
+    database="gokul",
+    user="postgres",
+    password="pass")
+    
+	 '''
+
+POSTGRESQL_ADDON_HOST=os.environ['POSTGRESQL_ADDON_HOST']
+POSTGRESQL_ADDON_DB=os.environ['POSTGRESQL_ADDON_DB']
+POSTGRESQL_ADDON_PASSWORD=os.environ['POSTGRESQL_ADDON_PASSWORD']
+POSTGRESQL_ADDON_USER=os.environ['POSTGRESQL_ADDON_USER']
 
 @api_view(['GET'])
 def searchApi(request):
-	conn = py.connect(host="localhost",
-    database="gokul",
-    user="postgres",
-    password="pass")   # which database ( gokul) to connect 
+
+
+	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
+    database=POSTGRESQL_ADDON_DB,
+    user=POSTGRESQL_ADDON_USER,
+    password=POSTGRESQL_ADDON_PASSWORD)   # which database ( gokul) to connect 
 
 
 	q=request.GET.get('q')
@@ -36,10 +50,10 @@ def searchApi(request):
 @api_view(['GET'])
 def autoCompleteApi(request):
 
-	conn = py.connect(host="localhost",
-    database="gokul",
-    user="postgres",
-    password="pass")   # which database ( gokul) to connect 
+	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
+    database=POSTGRESQL_ADDON_DB,
+    user=POSTGRESQL_ADDON_USER,
+    password=POSTGRESQL_ADDON_PASSWORD) #which database ( gokul) to connect 
 	q=request.GET.get('q')
 	limit=request.GET.get('limit')
 	offset=request.GET.get('offset')
@@ -58,6 +72,7 @@ def autoCompleteApi(request):
 	records={'branches':records}
 	return Response(records)
 
+'''
 def main(request):
 	conn = py.connect(host="localhost",
     database="gokul",
@@ -81,3 +96,5 @@ def main(request):
 		print("PostgreSQL connection is closed")
 
 	return HttpResponse('Main is executed !')
+
+'''
