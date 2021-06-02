@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-2!4+3mmq-xjzf9@3j^h*jwj(lbh6b&e&z#slx_lkg)iy%wl6p&'
 
-SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -54,11 +53,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'assign.urls'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-POSTGRESQL_ADDON_HOST=os.environ['POSTGRESQL_ADDON_HOST']
-POSTGRESQL_ADDON_DB=os.environ['POSTGRESQL_ADDON_DB']
-POSTGRESQL_ADDON_PASSWORD=os.environ['POSTGRESQL_ADDON_PASSWORD']
-POSTGRESQL_ADDON_USER=os.environ['POSTGRESQL_ADDON_USER']
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+
+ALLOWED_HOSTS = []
+
+
+
+POSTGRESQL_ADDON_HOST=os.getenv('POSTGRESQL_ADDON_HOST')
+POSTGRESQL_ADDON_DB=os.getenv('POSTGRESQL_ADDON_DB')
+POSTGRESQL_ADDON_PASSWORD=os.getenv('POSTGRESQL_ADDON_PASSWORD')
+POSTGRESQL_ADDON_USER=os.getenv('POSTGRESQL_ADDON_USER')
 
 TEMPLATES = [
     {
