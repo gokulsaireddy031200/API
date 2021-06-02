@@ -15,10 +15,12 @@ from rest_framework.response import Response
     
 	 '''
 
-POSTGRESQL_ADDON_HOST=os.environ['POSTGRESQL_ADDON_HOST']
-POSTGRESQL_ADDON_DB=os.environ['POSTGRESQL_ADDON_DB']
-POSTGRESQL_ADDON_PASSWORD=os.environ['POSTGRESQL_ADDON_PASSWORD']
-POSTGRESQL_ADDON_USER=os.environ['POSTGRESQL_ADDON_USER']
+
+
+POSTGRESQL_ADDON_HOST=os.getenv('POSTGRESQL_ADDON_HOST')
+POSTGRESQL_ADDON_DB=os.getenv('POSTGRESQL_ADDON_DB')
+POSTGRESQL_ADDON_PASSWORD=os.getenv('POSTGRESQL_ADDON_PASSWORD')
+POSTGRESQL_ADDON_USER=os.getenv('POSTGRESQL_ADDON_USER')
 
 @api_view(['GET'])
 def searchApi(request):
@@ -82,14 +84,7 @@ def main(request):
 
 
 	cur=conn.cursor()
-	'''
-	query='select city from bank_branches limit 10'   # query to the table
-
-	cur.execute(query)
-	records=cur.fetchall()
-	for i in records:
-		print(i)
-	'''
+	
 	if conn:
 		cur.close()
 		conn.close()
