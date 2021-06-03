@@ -3,4 +3,5 @@ django-heroku
 psycopg2
 djangorestframework
 gunicorn
+serpy
 
