@@ -35,12 +35,13 @@ def searchApi(request):
 
 	q=request.GET.get('q')
 	q=q.upper()
+	
 	limit=request.GET.get('limit')
 	offset=request.GET.get('offset')
 	if(limit==None):
-		limit='NULL'
+	    limit='NULL'
 	if(offset==None):
-		offset=0
+	    offset=0
 	cur=conn.cursor()
 	
 	query=  " select row_to_json(b.*) from bank_branches2 b WHERE (b.*)::text LIKE '%{}%' order by ifsc asc limit {} offset {}".format(q,limit,offset)  # query to the table
@@ -49,13 +50,14 @@ def searchApi(request):
 	
 	print('query exec')
 	try:
-		records=cur.fetchall()
+	    
+		
+	    records=cur.fetchall()
+	    records={'branches':records}
 
-		records={'branches':records}
-
-		return Response(records)
+	    return Response(records)
 	except Exception as e:
-		print(e)
+	    print(e)
 
 @api_view(['GET'])
 def autoCompleteApi(request):
@@ -69,9 +71,9 @@ def autoCompleteApi(request):
 	offset=request.GET.get('offset')
 	print('got req')
 	if(limit==None):
-		limit='NULL'
+	    limit='NULL'
 	if(offset==None):
-		offset=0
+	    offset=0
 
 	cur=conn.cursor()
 	
