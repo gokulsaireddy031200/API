@@ -52,9 +52,6 @@ def searchApi(request):
 	
 	print('query exec')
 	try:
-	    
-		
-	    records=cur.fetchall()
 	    records=[]
 	    for i in cur:
 	    	records.append(i[0])
