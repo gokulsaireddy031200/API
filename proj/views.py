@@ -59,7 +59,7 @@ def searchApi(request):
 	    print(records)
 	    cur.close()
 	    conn.close()
-	    return Response(records)
+	    return HttpResponse(records)
 	except Exception as e:
 	    print(e)
 
