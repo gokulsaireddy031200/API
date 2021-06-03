@@ -26,11 +26,13 @@ POSTGRESQL_ADDON_USER=os.getenv('POSTGRESQL_ADDON_USER')
 @api_view(['GET'])
 def searchApi(request):
 	print('inside searchapi',POSTGRESQL_ADDON_HOST)
-	
-	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
-    	database=POSTGRESQL_ADDON_DB,
-    	user=POSTGRESQL_ADDON_USER,
-    	password=POSTGRESQL_ADDON_PASSWORD)   # which database ( gokul) to connect 
+	try:
+		conn = py.connect(host=POSTGRESQL_ADDON_HOST,
+		database=POSTGRESQL_ADDON_DB,
+		user=POSTGRESQL_ADDON_USER,
+		password=POSTGRESQL_ADDON_PASSWORD)  # which database ( gokul) to connect 
+	except e:
+		print(e)
 	print('got req and conn')
 
 	q=request.GET.get('q')
