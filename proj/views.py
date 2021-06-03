@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import os
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 import psycopg2 as py
 
 import json
@@ -58,7 +58,7 @@ def searchApi(request):
 	    print(records)
 	    cur.close()
 	    conn.close()
-	    return Response(records)
+	    return JsonResponse(records,safe=False)
 	except Exception as e:
 	    print(e)
 
