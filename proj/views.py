@@ -54,7 +54,7 @@ def searchApi(request):
 		records={'branches':records}
 
 		return Response(records)
-	except Exception e:
+	except Exception as e:
 		print(e)
 
 @api_view(['GET'])
