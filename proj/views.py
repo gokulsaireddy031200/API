@@ -54,7 +54,7 @@ def searchApi(request):
 		
 	    records=cur.fetchall()
 	    records={'branches':records}
-
+	    print(records)
 	    return Response(records)
 	except Exception as e:
 	    print(e)
