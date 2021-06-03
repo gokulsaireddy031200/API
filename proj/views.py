@@ -31,7 +31,7 @@ def searchApi(request):
 		database=POSTGRESQL_ADDON_DB,
 		user=POSTGRESQL_ADDON_USER,
 		password=POSTGRESQL_ADDON_PASSWORD)  # which database ( gokul) to connect 
-	except e:
+	except Exception as e:
 		print(e)
 	print('got req and conn')
 
