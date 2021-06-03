@@ -24,14 +24,12 @@ POSTGRESQL_ADDON_USER=os.getenv('POSTGRESQL_ADDON_USER')
 
 @api_view(['GET'])
 def searchApi(request):
-	
-
-
+	print('inside searchapi')
 	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
     	database=POSTGRESQL_ADDON_DB,
     	user=POSTGRESQL_ADDON_USER,
     	password=POSTGRESQL_ADDON_PASSWORD)   # which database ( gokul) to connect 
-
+	print('got req and conn')
 
 	q=request.GET.get('q')
 	q=q.upper()
@@ -46,13 +44,15 @@ def searchApi(request):
 	query=  " select row_to_json(b.*) from bank_branches2 b WHERE (b.*)::text LIKE '%{}%' order by ifsc asc limit {} offset {}".format(q,limit,offset)  # query to the table
 
 	cur.execute(query)
+	
+	print('query exec')
 	records=cur.fetchall()
 	records={'branches':records}
 	return Response(records)
 
 @api_view(['GET'])
 def autoCompleteApi(request):
-
+	print('inside autoapi')
 	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
     	database=POSTGRESQL_ADDON_DB,
     	user=POSTGRESQL_ADDON_USER,
@@ -60,6 +60,7 @@ def autoCompleteApi(request):
 	q=request.GET.get('q')
 	limit=request.GET.get('limit')
 	offset=request.GET.get('offset')
+	print('got req')
 	if(limit==None):
 		limit='NULL'
 	if(offset==None):
