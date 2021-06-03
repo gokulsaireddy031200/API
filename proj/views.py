@@ -24,12 +24,13 @@ POSTGRESQL_ADDON_USER=os.getenv('POSTGRESQL_ADDON_USER')
 
 @api_view(['GET'])
 def searchApi(request):
+	
 
 
 	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
-    database=POSTGRESQL_ADDON_DB,
-    user=POSTGRESQL_ADDON_USER,
-    password=POSTGRESQL_ADDON_PASSWORD)   # which database ( gokul) to connect 
+    	database=POSTGRESQL_ADDON_DB,
+    	user=POSTGRESQL_ADDON_USER,
+    	password=POSTGRESQL_ADDON_PASSWORD)   # which database ( gokul) to connect 
 
 
 	q=request.GET.get('q')
@@ -53,9 +54,9 @@ def searchApi(request):
 def autoCompleteApi(request):
 
 	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
-    database=POSTGRESQL_ADDON_DB,
-    user=POSTGRESQL_ADDON_USER,
-    password=POSTGRESQL_ADDON_PASSWORD) #which database ( gokul) to connect 
+    	database=POSTGRESQL_ADDON_DB,
+    	user=POSTGRESQL_ADDON_USER,
+    	password=POSTGRESQL_ADDON_PASSWORD) #which database ( gokul) to connect 
 	q=request.GET.get('q')
 	limit=request.GET.get('limit')
 	offset=request.GET.get('offset')
@@ -73,23 +74,3 @@ def autoCompleteApi(request):
 	records=cur.fetchall()
 	records={'branches':records}
 	return Response(records)
-
-'''
-def main(request):
-	conn = py.connect(host="localhost",
-    database="gokul",
-    user="postgres",
-    password="pass")   # which database ( gokul) to connect 
-
-
-
-	cur=conn.cursor()
-	
-	if conn:
-		cur.close()
-		conn.close()
-		print("PostgreSQL connection is closed")
-
-	return HttpResponse('Main is executed !')
-
-'''
