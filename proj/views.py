@@ -5,6 +5,7 @@ from django.http import HttpResponse
 import psycopg2 as py
 
 
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 '''
@@ -24,7 +25,8 @@ POSTGRESQL_ADDON_USER=os.getenv('POSTGRESQL_ADDON_USER')
 
 @api_view(['GET'])
 def searchApi(request):
-	print('inside searchapi')
+	print('inside searchapi',POSTGRESQL_ADDON_HOST)
+	
 	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
     	database=POSTGRESQL_ADDON_DB,
     	user=POSTGRESQL_ADDON_USER,
