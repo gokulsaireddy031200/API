@@ -25,14 +25,12 @@ POSTGRESQL_ADDON_USER=os.getenv('POSTGRESQL_ADDON_USER')
 
 @api_view(['GET'])
 def searchApi(request):
-	print('inside searchapi',POSTGRESQL_ADDON_HOST)
-	try:
-		conn = py.connect(host=POSTGRESQL_ADDON_HOST,
-		database=POSTGRESQL_ADDON_DB,
-		user=POSTGRESQL_ADDON_USER,
-		password=POSTGRESQL_ADDON_PASSWORD)  # which database ( gokul) to connect 
-	except Exception as e:
-		print(e)
+	print('inside searchapi')
+	
+	conn = py.connect(host=POSTGRESQL_ADDON_HOST,
+	database=POSTGRESQL_ADDON_DB,
+	user=POSTGRESQL_ADDON_USER,
+	password=POSTGRESQL_ADDON_PASSWORD)  # which database ( gokul) to connect 
 	print('got req and conn')
 
 	q=request.GET.get('q')
@@ -50,9 +48,14 @@ def searchApi(request):
 	cur.execute(query)
 	
 	print('query exec')
-	records=cur.fetchall()
-	records={'branches':records}
-	return Response(records)
+	try:
+		records=cur.fetchall()
+
+		records={'branches':records}
+
+		return Response(records)
+	except Exception e:
+		print(e)
 
 @api_view(['GET'])
 def autoCompleteApi(request):
