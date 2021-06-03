@@ -55,11 +55,13 @@ def searchApi(request):
 	    
 		
 	    records=cur.fetchall()
-	    records=json.dumps(records)
+	    records=[]
+	    for i in cur:
+	    	records.append(i[0])
 	    print(records)
 	    cur.close()
 	    conn.close()
-	    return HttpResponse(records)
+	    return Response(records)
 	except Exception as e:
 	    print(e)
 
