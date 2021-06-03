@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['gokulapi.herokuapp.com' ]
 
@@ -100,6 +100,8 @@ DATABASES = {
        'PASSWORD': POSTGRESQL_ADDON_PASSWORD,
        'HOST': POSTGRESQL_ADDON_HOST,
        'PORT': '5432',
+     
+        'CON_MAX_AGE': 0,
    }
    
      
@@ -142,7 +144,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT= os.path.join(BASE_DIR,'static_media/')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
