@@ -25,6 +25,8 @@ POSTGRESQL_ADDON_DB=os.getenv('POSTGRESQL_ADDON_DB')
 POSTGRESQL_ADDON_PASSWORD=os.getenv('POSTGRESQL_ADDON_PASSWORD')
 POSTGRESQL_ADDON_USER=os.getenv('POSTGRESQL_ADDON_USER')
 
+from . import serializers
+
 @api_view(['GET'])
 def searchApi(request):
 	print('inside searchapi')
@@ -56,9 +58,10 @@ def searchApi(request):
 	    for i in cur:
 	    	records.append(i[0])
 	    print(records)
+	    records=serializers.resSerializer(records,many=True)
 	    cur.close()
 	    conn.close()
-	    return JsonResponse(records,safe=False)
+	    return Response(records.data)
 	except Exception as e:
 	    print(e)
 
