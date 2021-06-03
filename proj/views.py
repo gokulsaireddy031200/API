@@ -4,6 +4,8 @@ import os
 from django.http import HttpResponse
 import psycopg2 as py
 
+import json
+
 
 
 from rest_framework.decorators import api_view
@@ -53,8 +55,10 @@ def searchApi(request):
 	    
 		
 	    records=cur.fetchall()
-	    records={'branches':records}
+	    records=json.dumps(records)
 	    print(records)
+	    cur.close()
+	    conn.close()
 	    return Response(records)
 	except Exception as e:
 	    print(e)
